@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- External css -->
+    <link href="styles.css" rel="stylesheet" />
+    <!-- js -->
+    <!-- <script src="script.js"></script> -->
+  </head>
+  <body>
+    <main class="container-custom">
+      <section class="leftBlock">
+        <h2>Unlock your recruitment potential!</h2>
+        <img src="loginBackground.png" alt="Image" decoding="async" />
+        <h3>Sign up today and streamline your hiring </h3>
+          <h3> process effortlessly </h3>
+      </section>
+      <!-- decoding attribute =>  
+            =>The decoding property of the HTMLImageElement interface provides a hint to the browser as to how it should decode the image.
+            =>Whether it should wait for the image to be decoded before presenting other content updates or not.
+            "sync" => Decode the image synchronously for atomic presentation with other content.
+            "async" => Decode the image asynchronously and allow other content to be rendered before this completes.
+            "auto" => No preference for the decoding mode; the browser decides what is best for the user  
+      -->
+      <section class="rightBlock">
+        <div class="form-container">
+          <img
+            src="logo.png"
+            alt="CompanyLogo"
+            title="Company Logo"
+            decoding="async"
+          />
+          <h6>Welcome! Sign in to continue to Vyblog</h6>
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Enter Email"
+                aria-label="Enter your email address"
+         
+                title="Please Enter the valid Email"
+                autofocus
+                spellcheck="true"
+                required
+              />
+            </div>
+            <!-- 
+            aria-lable attribute =>  
+              ARIA (Accessible Rich Internet Applications) labels are essential for enhancing web accessibility,
+              Particularly for users with disabilities who rely on assistive technologies like screen readers.
+             
+            -->
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Enter Password"
+              aria-label="Enter your Password"
+              required
+            />
+              <!-- <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Enter Password"
+                aria-label="Enter your Password"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{6,}" title="Password must be at least 6 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character."
+                autocomplete="new-password"
+                required
+              /> -->
+            </div>
+            <div class="form-group text-right ">
+              <a href="#" class="greyShade">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              Sign in
+            </button>
+            <div class="form-group text-center mt-3">
+              <a href="#" class="greyShade">Trouble logging?</a>
+            </div>
+            <div class="form-group text-center mt-3">
+              <p>New to Vybog? <a href="#">Create user</a></p>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      document.getElementById('loginForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    console.log(email,password)
+    const response = await fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    });
+
+    const result = await response.text();
+    alert(result);
+
+});
+      </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
